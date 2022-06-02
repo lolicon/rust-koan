@@ -58,6 +58,7 @@ fn revoking_mutability() {
     let mut rust = Language { version: "1.3.0" };
     rust.version = "1.4.0";
     assert_eq!(rust.version, "1.4.0");
+    let mut rust = rust;
     rust.version = "1.5.0";
     let rust = rust;
     assert_eq!(rust.version, "1.5.0");

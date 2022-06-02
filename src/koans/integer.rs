@@ -24,7 +24,7 @@ fn signed_ints() {
 #[test]
 fn sub_signed_int() {
     let mut num: i8 = 0;
-    let negative: i8 = i8::min_value();
+    let negative: i8 = -1 - i8::max_value();
     num += negative;
     assert!(num == i8::min_value());
 }

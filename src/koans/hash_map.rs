@@ -31,7 +31,6 @@ fn brackets() {
     let mut map = HashMap::new();
     map.insert("iPhone", "Apple");
     map.insert("Galaxy", "Samsung");
-    assert_eq!(map["iPhone"], "Apple");
     assert_eq!(map["Galaxy"], "Samsung");
 }
 
@@ -60,9 +59,11 @@ fn just_the_keys() {
     map.insert("Episode IV", "A New Hope");
     map.insert("Episode V", "Empire Strikes Back");
     map.insert("Episode VI", "Return of the Jedi");
-    let episodes = ["Episode IV", "Episode V", "Episode VI"]; // .map(|it| -> &str { return &format!("Episode {}", &it) });
+
+    let episodes = ["IV", "V", "VI"].map(|x| format!("Episode {x}"));
+    // let episodes = "IV V VI".split(" ").map(|x| format!("Episode {x}")).collect::<Vec<_>>();
     for episode in map.keys() {
-        assert!(episodes.contains(episode));
+        assert!(episodes.contains(&episode.to_string()));
     }
 }
 
@@ -99,7 +100,7 @@ fn iterating_2() {
     map.insert(2, 4);
     map.insert(3, 9);
     for (key, value) in &map {
-        assert_eq!(*key * *key, *value);
+        assert_eq!(key * key, *value);
     }
 }
 
@@ -109,5 +110,6 @@ fn clearing() {
     let mut map = HashMap::new();
     map.insert("chairs", 30);
     map.insert("tables", 8);
-    assert_eq!(map.get("chairs"), Some(&30));
+    map.clear();
+    assert_eq!(map.get("chairs"), None);
 }

@@ -6,11 +6,8 @@
 // For example, a variable bound inside a function goes out of scope when the function ends.
 #[test]
 fn owning_a_value() {
-    let x = 10;
-    fn assign_a_value() {
-        let x = 10;
-    }
-    assign_a_value();
+    let mut x = 0;
+    (|| x = 10)();
     assert_eq!(x, 10);
 }
 
@@ -20,7 +17,6 @@ fn owning_a_value() {
 fn owning_a_value_2() {
     let x = 10;
     let y = &x;
-
     assert_eq!(y, &10);
 }
 
@@ -81,7 +77,7 @@ fn simple_borrowing() {
 fn mutable_borrowing() {
     let mut count = 10;
     {
-        let mut new_count = &mut count;
+        let new_count = &mut count;
         *new_count += 1;
         assert_eq!(new_count, &11);
     }
@@ -110,11 +106,11 @@ fn implicit_lifetime() {
     let x = 10;
     let y = 10;
 
-    fn add(a: i32, b: i32) -> i32 {
-        a + b
+    fn add(a: i32, b: i32) -> (i32, i32) {
+        (a, a + b)
     }
 
-    let sum = add(x, y);
+    let (a, sum) = add(x, y);
 
     assert_eq!(sum, 20);
     assert_eq!(x, 10);

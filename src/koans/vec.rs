@@ -1,7 +1,7 @@
 // Vecs act sort of like arrays, but allow more flexibility
 #[test]
 fn making_an_empty_vec() {
-    let vector: Vec<()> = vec![];
+    let vector: Vec<()> = Vec::new();
     assert!(vector.len() == 0);
 }
 
@@ -108,7 +108,7 @@ fn remove() {
 fn empty_vecs() {
     let mut vector = vec![""; 0];
     assert!(vector.is_empty()); // should return true
-    vector.push("");
+    vector.push("hello");
     assert!(!vector.is_empty()); // should return false
 }
 
@@ -133,7 +133,7 @@ fn first_and_last() {
 fn contains_element() {
     let vector = vec!["Google", "Twitter", "Mozilla"];
     assert!(vector.contains(&"Google"));
-    assert!(!vector.contains(&""));
+    assert!(!vector.contains(&"Hello"));
 }
 
 // Similar to contains(), you can also check if a Vec begins with a particular element
@@ -147,7 +147,7 @@ fn starts_with() {
 #[test]
 fn starts_with_2() {
     let vector = vec![0, 2, 4, 6];
-    assert!(vector.starts_with(&[0]));
+    assert!(vector.starts_with(&[0, 2]));
 }
 
 // The same can be said for ends_with
